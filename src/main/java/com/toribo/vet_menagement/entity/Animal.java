@@ -1,6 +1,7 @@
 package com.toribo.vet_menagement.entity;
 
 
+import com.toribo.vet_menagement.service.AnimalGender;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -11,22 +12,22 @@ public class Animal {
     @Id
     private Long vetPassport;
 
-    @Column(name = "nickname",nullable = false)
+    @Column(nullable = false)
     private String nickname;
 
-    @Column(name = "species", nullable = false)
+    @Column( nullable = false)
     private String species;
 
-    @Column(name = "breed")
+    @Column()
     private String breed;
 
-    @Column( name = "age")
+    @Column()
     private int age;
 
-    @Column (name = "gender")
-    private String gender;
+    @Column (name = "gender", nullable = false)
+    private AnimalGender gender;
 
-    @Column (name = "details")
+    @Column ()
     private String details;
 
     @Column(name = "created_at", nullable = false)
@@ -85,11 +86,11 @@ public class Animal {
         this.age = age;
     }
 
-    public String getGender() {
+    public AnimalGender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(AnimalGender gender) {
         this.gender = gender;
     }
 

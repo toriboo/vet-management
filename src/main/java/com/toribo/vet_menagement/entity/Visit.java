@@ -32,7 +32,7 @@ public class Visit {
     private Vet vet;
 
     @ManyToOne
-    @JoinColumn(name = "client", nullable = false)
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
     @Enumerated(EnumType.STRING)
