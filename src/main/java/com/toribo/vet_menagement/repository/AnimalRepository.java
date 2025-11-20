@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
-    List<Animal> findByClient(Long clientId);
+    List<Animal> findByClientId(Long clientId);
     @Query("SELECT a FROM Animal a WHERE a.nickname LIKE %:partNickname%")
     List<Animal> findByNickname(@Param("partNickname") String partNickname);
     List<Animal> findBySpecies(String species);

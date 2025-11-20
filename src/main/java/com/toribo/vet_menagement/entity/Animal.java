@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "animals")
 public class Animal {
     @Id
-    private Long vetPassport;
+    private int vetPassport;
 
     @Column(nullable = false)
     private String nickname;
@@ -40,19 +40,19 @@ public class Animal {
     public Animal(){
     }
 
-    public Animal(Long vetPassport, String nickname,String species, LocalDateTime createdAt, Client client){
+    public Animal(int vetPassport, String nickname, String species, LocalDateTime createdAt){
         this.vetPassport = vetPassport;
         this.nickname = nickname;
         this.species = species;
         this.createdAt = createdAt;
-        this.client = client;
+
         
     }
 
-    public Long getVetPassport() {
+    public int getVetPassport() {
         return vetPassport;
     }
-    public void setVetPassport(Long vetPassport) {
+    public void setVetPassport(int vetPassport) {
         this.vetPassport = vetPassport;
     }
 

@@ -11,5 +11,5 @@ public interface VetService {
     Vet save(Vet vet);
     void deleteById(Long id);
     Optional<Vet> findByEmail(String email);
-    Optional<Vet> findBySpecialization(String specialization);
+    List<Vet> findBySpecialization(String specialization);
 }

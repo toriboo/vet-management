@@ -13,7 +13,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     Optional<Client> findByEmail(String email);
     List<Client> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName);
 
-    List<Client> findByAnimal (Long vetPassport);
+    List<Client> findByAnimalId (Long vetPassport);
 
 
 }
