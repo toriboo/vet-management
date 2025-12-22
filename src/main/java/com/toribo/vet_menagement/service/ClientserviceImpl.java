@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class ClientserviceImpl implements ClientService {
+public class ClientServiceImpl implements ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
@@ -41,12 +41,13 @@ public class ClientserviceImpl implements ClientService {
         return clientRepository.findByEmail(email);
     }
 
-    public List<Client> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName){
+    public List<Client> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName)
+    {
         return clientRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(firstName,lastName);
     }
-
-    public List<Client> findByAnimalId(Long vetPassport){
-        return clientRepository.findByAnimalId(vetPassport);
+    @Override
+    public Optional<Client> findByAnimalVetPassport(Long vetPassport){
+        return clientRepository.findByAnimalVetPassport(vetPassport);
 
     }
 

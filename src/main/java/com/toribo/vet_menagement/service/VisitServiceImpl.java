@@ -38,26 +38,26 @@ public class VisitServiceImpl implements VisitService{
     }
 
     @Override
-    public Optional<Visit> findByVetId(Long vetId) {
+    public List<Visit> findByVetId(Long vetId) {
         return visitRepository.findByVetId(vetId);
     }
 
     @Override
-    public Optional<Visit> findByVetPassport(Long vetPassport) {
-        return visitRepository.findByVetPassport(vetPassport);
+    public List<Visit> findByAnimalVetPassport(Long vetPassport) {
+        return visitRepository.findByAnimalVetPassport(vetPassport);
     }
 
     @Override
-    public Optional<Visit> findByClientId(Long clientId) {
+    public List<Visit> findByClientId(Long clientId) {
         return visitRepository.findByClientId(clientId);
     }
 
     @Override
     public List<Visit> findByDateTime(LocalDateTime dateTime) {
-        return visitRepository.findByDateTime(dateTime);
+        return visitRepository.findByVisitDateTime(dateTime);
     }
     public List<Visit> findByStatus(String status){
-        return visitRepository.findBYStatus(status);
+        return visitRepository.findByStatus(status);
     }
 
 }

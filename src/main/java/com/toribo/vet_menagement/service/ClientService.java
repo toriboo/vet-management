@@ -11,4 +11,6 @@ public interface ClientService {
     Client save(Client client);
     void deleteById(Long id);
     Optional<Client> findByEmail(String email);
+    Optional<Client> findByAnimalVetPassport(Long vetPassport);
+
 }

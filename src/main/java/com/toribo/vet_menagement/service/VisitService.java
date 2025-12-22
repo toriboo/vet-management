@@ -12,8 +12,8 @@ public interface VisitService {
     Optional<Visit> findById(Long id);
     Visit save(Visit visit);
     void deleteById(Long id);
-    Optional<Visit> findByVetId(Long vetId);
-    Optional<Visit> findByVetPassport(Long vetPassport);
-    Optional <Visit> findByClientId(Long clientId);
+    List<Visit> findByVetId(Long vetId);
+    List<Visit> findByAnimalVetPassport(Long vetPassport);
+    List<Visit> findByClientId(Long clientId);
     List<Visit> findByDateTime(LocalDateTime dateTime);
 }

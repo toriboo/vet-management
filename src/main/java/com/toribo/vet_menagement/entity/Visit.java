@@ -17,14 +17,13 @@ public class Visit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "visit_date",nullable = false)
-    private LocalDateTime visitDate;
-
+    @Column(name = "visit_date_time",nullable = false)
+    private LocalDateTime visitDateTime;
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "vetPassport", nullable = false)
+    @JoinColumn(name = "animal_id", nullable = false)
     private Animal animal;
 
     @ManyToOne
@@ -40,8 +39,8 @@ public class Visit {
 
     public Visit() {}
 
-    public Visit(LocalDateTime visitDate, LocalDateTime createdAt, VisitStatus status, Client client, Vet vet, Animal animal){
-        this.visitDate = visitDate;
+    public Visit(LocalDateTime visitDateTime, LocalDateTime createdAt, VisitStatus status, Client client, Vet vet, Animal animal){
+        this.visitDateTime = visitDateTime;
         this.createdAt = createdAt;
         this.status = status;
         this.client = client;
@@ -50,10 +49,10 @@ public class Visit {
     }
 
     public LocalDateTime getVisitDate() {
-        return visitDate;
+        return visitDateTime;
     }
     public void setVisitDate(LocalDateTime visitDate) {
-        this.visitDate = visitDate;
+        this.visitDateTime = visitDate;
     }
 
     public LocalDateTime getCreatedAt() {

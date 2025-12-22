@@ -1,8 +1,11 @@
 package com.toribo.vet_menagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,9 +31,9 @@ public class Client {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Animal> animals;
+
+    private List<Animal> animals = new ArrayList<>();
 
     public Client() {
     }

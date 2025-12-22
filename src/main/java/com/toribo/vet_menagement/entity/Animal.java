@@ -1,6 +1,8 @@
 package com.toribo.vet_menagement.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.toribo.vet_menagement.service.AnimalGender;
 import jakarta.persistence.*;
 
@@ -8,9 +10,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "animals")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Animal {
     @Id
-    private int vetPassport;
+    @Column(name = "vet_passport", nullable = false, unique = true)
+    private Long vetPassport;
 
     @Column(nullable = false)
     private String nickname;
@@ -24,7 +28,7 @@ public class Animal {
     @Column()
     private int age;
 
-    @Column (name = "gender", nullable = false)
+    @Enumerated(EnumType.STRING)
     private AnimalGender gender;
 
     @Column ()
@@ -35,24 +39,28 @@ public class Animal {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @JsonIgnore
     private Client client;
 
     public Animal(){
     }
 
-    public Animal(int vetPassport, String nickname, String species, LocalDateTime createdAt){
+    public Animal(Long vetPassport, String nickname, String species, String breed,
+                  int age, AnimalGender gender, String details, LocalDateTime createdAt, Client client) {
         this.vetPassport = vetPassport;
         this.nickname = nickname;
         this.species = species;
+        this.breed = breed;
+        this.age = age;
+        this.gender = gender != null ? gender : AnimalGender.UNDEFINED;
+        this.details = details;
         this.createdAt = createdAt;
-
-        
+        this.client = client;
     }
-
-    public int getVetPassport() {
+    public Long getVetPassport() {
         return vetPassport;
     }
-    public void setVetPassport(int vetPassport) {
+    public void setVetPassport(Long vetPassport) {
         this.vetPassport = vetPassport;
     }
 
@@ -91,7 +99,7 @@ public class Animal {
     }
 
     public void setGender(AnimalGender gender) {
-        this.gender = gender;
+        this.gender = gender != null ? gender : AnimalGender.UNDEFINED;
     }
 
     public String getDetails() {

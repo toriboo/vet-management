@@ -7,17 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface VisitRepository extends JpaRepository<Visit,Long> {
-    List<Visit> findBYStatus(String status);
+    List<Visit> findByStatus(String status);
 
-    Optional<Visit> findByVetId(Long vetId);
-    Optional<Visit> findByVetPassport(Long vetPassport);
-    Optional <Visit> findByClientId(Long clientId);
+    List<Visit> findByVetId(Long vetId);
+    List<Visit> findByAnimalVetPassport(Long vetPassport);
+    List <Visit> findByClientId(Long clientId);
 
-    List<Visit> findByDateTime(LocalDateTime dateTime);
+    List<Visit> findByVisitDateTime(LocalDateTime dateTime);
 
 
 }
