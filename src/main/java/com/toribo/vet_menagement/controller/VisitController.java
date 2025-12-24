@@ -43,7 +43,7 @@ public class VisitController {
     private AnimalRepository animalRepository;
 
 
-    // Получить писок всех приемов
+    // Получить cписок всех приемов
     @GetMapping
     public ResponseEntity<List<VisitDTO>> getAllVisits() {
         List<Visit> visits = visitService.findAll();
@@ -138,7 +138,7 @@ public class VisitController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<VisitDTO>> searchVisitsByVetId(@RequestParam LocalDateTime visitDateTime) {
+    public ResponseEntity<List<VisitDTO>> searchVisitsByVisitDateTime(@RequestParam LocalDateTime visitDateTime) {
         List<Visit> visits = visitService.findByDateTime(visitDateTime);
         List<VisitDTO> visitDTOs = visits.stream()
                 .map(this::convertToDTO)

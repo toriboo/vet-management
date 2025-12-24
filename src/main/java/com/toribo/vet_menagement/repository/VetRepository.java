@@ -12,7 +12,5 @@ import java.util.Optional;
 public interface VetRepository extends JpaRepository<Vet,Long> {
     Optional<Vet> findByEmail(String email);
 
-    List<Vet> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName);
-
     List<Vet> findBySpecialization(String specialization);
 }

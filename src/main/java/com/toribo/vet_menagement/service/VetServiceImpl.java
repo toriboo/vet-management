@@ -49,7 +49,5 @@ public class VetServiceImpl implements VetService{
 
     }
 
-    public List<Vet> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName,String lastName){
-        return vetRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(firstName,lastName);
-    }
+
 }

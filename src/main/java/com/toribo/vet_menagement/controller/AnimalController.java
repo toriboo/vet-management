@@ -5,8 +5,8 @@ import com.toribo.vet_menagement.dto.AnimalDTO;
 import com.toribo.vet_menagement.dto.CreateAnimalDTO;
 
 import com.toribo.vet_menagement.entity.Animal;
-import com.toribo.vet_menagement.entity.Client;
 
+import com.toribo.vet_menagement.entity.Client;
 import com.toribo.vet_menagement.repository.ClientRepository;
 import com.toribo.vet_menagement.service.*;
 
@@ -14,26 +14,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import jakarta.validation.Valid;
-
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 
 @RestController
 @RequestMapping("/api/animals")
 public class AnimalController {
-
+    Authentication authentication;
     @Autowired
     private AnimalService animalService;
     @Autowired
     private ClientRepository clientRepository;
-    // Получить писок всех животных
+    // Получить cписок всех животных
     @GetMapping
     public ResponseEntity<List<AnimalDTO>> getAllAnimals() {
         List<Animal> animals = animalService.findAll();
@@ -101,7 +101,7 @@ public class AnimalController {
 
 
     // поиск приема по id клиента
-    @GetMapping("/search/clientId")
+    @GetMapping("/search/client")
     public ResponseEntity<List<AnimalDTO>> searchVAnimalsByClientId(@RequestParam Long clientId) {
         List<Animal> animals = animalService.findByClientId(clientId);
         List<AnimalDTO> animalDTOs = animals.stream()
@@ -111,7 +111,7 @@ public class AnimalController {
     }
 
 
-    @GetMapping("/search/Nickname")
+    @GetMapping("/search/nickname")
     public ResponseEntity<List<AnimalDTO>> searchAnimalByNickname(@RequestParam String nickname) {
         List<Animal> animals = animalService.findByNickname(nickname);
         List<AnimalDTO> animalDTOs = animals.stream()
@@ -149,7 +149,11 @@ public class AnimalController {
         animal.setVetPassport(dto.getVetPassport());
         animal.setCreatedAt(LocalDateTime.now());
         animal.setNickname(dto.getNickname());
-        animal.setClient(clientRepository.findById(19L).get());
+        String username = authentication.getName();
+        Client client = clientRepository.findByEmail(username)
+                .orElseThrow(() -> new RuntimeException("Client not found"));
+
+        animal.setClient(client);
         return animal;
     }
 }

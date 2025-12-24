@@ -4,6 +4,7 @@ package com.toribo.vet_menagement.service;
 import com.toribo.vet_menagement.entity.Client;
 import com.toribo.vet_menagement.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,10 +26,13 @@ public class ClientServiceImpl implements ClientService {
     public Optional<Client> findById(Long id) {
         return clientRepository.findById(id);
     }
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public Client save(Client client) {
+    public  Client save(Client client) {
+        client.setPassword(passwordEncoder.encode(client.getPassword()));
         return clientRepository.save(client);
+
     }
 
     @Override
@@ -50,6 +54,8 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findByAnimalVetPassport(vetPassport);
 
     }
+
+
 
 
 }

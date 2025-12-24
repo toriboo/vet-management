@@ -43,7 +43,7 @@ public class VetController {
     }
 
     // Поиск
-    @GetMapping("/search/spec")
+    @GetMapping("/search/spec/{spec}")
     public ResponseEntity<List<VetDTO>> searchVetsBySpec(@RequestParam String specialization) {
         List<Vet> vets = vetService.findBySpecialization(specialization);
         List<VetDTO> vetDTOs = vets.stream()
@@ -51,7 +51,7 @@ public class VetController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(vetDTOs);
     }
-    @GetMapping("/search/email")
+    @GetMapping("/search/email/{email}")
     public ResponseEntity<List<VetDTO>> searchVetsByEamil(@RequestParam String email) {
         Optional<Vet> vets = vetService.findByEmail(email);
         List<VetDTO> vetDTOs = vets.stream()

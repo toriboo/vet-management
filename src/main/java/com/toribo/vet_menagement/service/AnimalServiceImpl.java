@@ -54,7 +54,7 @@ public class AnimalServiceImpl implements AnimalService{
         return animalRepository.findBySpecies(species);
     }
 
-    public Optional<Animal> findByClientAndNickname(String nickname,String clientId){
+    public Optional<Animal> findByClientAndNickname(String nickname,Long clientId){
         return animalRepository.findByClientAndNickname(nickname,clientId);
     }
 
